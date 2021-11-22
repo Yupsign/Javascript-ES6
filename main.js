@@ -1,3 +1,4 @@
+// 초급 자바스크립트
 /*--------------------------------------------------
 // null = 존재하지 않는 값
 let user = null;
@@ -225,3 +226,289 @@ for (let index=0; index < days.length; index++) {
   console.log(day);
 }
 */
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------------
+// 중급 자바스크립트
+
+// 호이스팅 
+ // Temporal Dead Zone      console.log(name) 
+ // 함수 선언 및 할당        const name = 'Mike' 
+ // 사용 가능               console.log(name) 
+
+
+// 변수 생성과정
+ // 1. 선언 단계
+ // 2. 초기화 단계
+ // 3. 할당 단계
+ // (var : 선언+초기화 -> 할당) , (let : 선언 -> 초기화 -> 할당) , (const : 선언+초기화+할당)
+
+// 스코프
+ // var : 함수 스코프 (최근 사용 X)
+ // let,const : 블록 스코프 (예측 가능범위를 넓이고 에러를 줄여줌으로서 최근 사용 O)
+
+//생성자 함수 (첫 글자는 대문자로) : 비슷한 객체를 여러개 만들때 사용
+/*function User(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+let user1 = new User('Mike', 30);
+let user2 = new User('Jane', 28);
+let user3 = new User('Sara', 27);
+*/
+/*function User(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayName = function() {
+    console.log(this.name);
+  }
+}
+let user5 = new User('Kang', 28);
+user5.sayName(); //Kang
+*/
+/*function Item(title, price) {
+  // this = {};
+  this.title = title;
+  this.price = price;
+  this.showPrice = function() {
+    console.log(`가격은 ${price}원 입니다`);
+  };
+  // return this;
+}
+
+const item1 = new Item('인형' , 8000);
+const item2 = Item('로보트' , 4500); // new를 주지 않으면 Item그 자체로 쓰이기 때문에 리턴하는 값이 없어 undefined가 나온다.
+const item3 = new Item('드론' , 120000);
+
+console.log(item1, item2, item3);
+item3.showPrice();
+*/
+
+// 객체 메소드
+/*let a = 'age'
+const user = {
+  name : 'Mike',
+  [a] : 30 // 계산된 프로퍼티
+}
+*/
+/*const user = {
+  [1 + 4] : 5,
+  ['안녕'+'하세요'] : 'Hello'
+}
+console.log(user);
+*/
+
+// Object.assign() : 객체 복제
+/*const user = {
+  name : 'Mike',
+  age : 28
+}
+const newUser = Object.assign({},user);
+newUser.name = 'Tom'
+console.log(user); // 'Mike' (newUser != user)
+console.log(newUser); // 'Tom' (newUser != user)
+*/
+/*
+//Object.keys() : 키 배열 변환
+const user = {
+  name : 'Mike',
+  age : 30, 
+  gender : 'male',
+}
+Object.keys(user); // ['Mike', 30, 'male'] 키 배열 반환
+
+//Object.valuse() : 값 배열 변환
+const user1 = {
+  name : 'Mike',
+  age : 30, 
+  gender : 'male',
+}
+Object.values(user1); // ['name', 'age', 'gender'] 값 배열 반환
+
+//Object.entries() : 키/값 배열 변환
+const user2 = {
+  name : 'Mike',
+  age : 30, 
+  gender : 'male',
+}
+Object.entries(user2); // [['name','Mike'], ['age',30], ['gender','male']] 키/값 배열 반환
+
+//Object.fromEntries() : 키/값 배열 -> 객체
+const arr =
+[
+  ['name','Mike'],
+  ['age',30],
+  ['gender','male']
+];
+Object.fromEntries(arr); // {name:'Mike, age:30, gender:'male'} 객체로 반환
+*/
+
+/* 예제 1번
+let n = 'name';
+let a = 'age';
+
+const user = {
+  [n] : 'Mike',
+  [a] : 30,
+};
+console.log(user);
+*/
+/* 예제 2번 
+function makeObj(key, val){
+  return {
+    [key] : val,
+  };
+}
+const obj = makeObj('성별', 'male');
+console.log(obj);
+*/
+/* 예제 3번 (객체 복제)
+const user = {
+  name: 'Mike',
+  age: 30,
+};
+const user2 = Object.assign({},user);
+user2.name = 'Tom'
+console.log(user2)
+console.log(user)
+*/
+/* 예제 4번 (객체 -> 키/값 배열)
+const user = {
+  name: 'Mike',
+  age: 30,
+};
+const result = Object.entries(user);
+console.log(result);
+*/
+/* 예제 5번 (배열 -> 객체)
+let arr = [
+  ['mon', '월'],
+  ['tue', '화'],
+];
+const result = Object.fromEntries(arr);
+console.log(result);
+*/
+
+// Symbol (유일한 식별자)
+/*const a = Symbol();
+const b = Symbol();
+console.log(a);
+console.log(b);
+console.log(a===b); //false
+*/
+
+// Symbol.for() : 전역 심볼
+ // 1. 하나의 심볼만 보장받을 수 있음
+ // 2. 없으면 만들고, 있으면 가져오기 때문
+ // 3. Symbol 함수는 매번 다른 Symbol 값이 생성하지만, Symbol.for 메소드는 하나를 생성한 뒤 키를 통해 같은 Symbol을 공유
+ // const id1 = Symbol.for('id');
+ // const id2 = Symbol.for('id'); // id1 === id2  (true)
+
+// ex)다른 개발자가 만들어 놓은 객체
+/*const user = {
+  name: 'Mike',
+  age: 30,
+};
+// 나의 작업
+// user.showName = function () {};
+const showName = Symbol('show name');
+user[showName] = function() {
+  console.log(this.name);
+};
+user[showName]();
+// 사용자가 접속하면 보는 메세지
+for (let key in user) {
+  console.log(`His ${key} is ${user[key]},`);
+}
+*/
+
+// toString() : 숫자 -> 문자열 /  10진수 -> 2,16진수 
+/*let num = 10;
+console.log(num.toString()); // "10"
+console.log(num.toString(2)); // "1010"
+console.log(num.toString(16)); // "a"
+*/
+
+/*
+// Math method
+  // 1. Math.ceil() : 올림
+  let num = 1.1;
+  Math.ceil(num); // 6
+
+  // 2. Math.floor() : 내림
+  let num2 = 1.8;
+  Math.floor(num2); // 2
+
+  // 3. Math.round() : 반올림
+  let num3 = 5.1;
+  let num4 = 5.7;
+  Math.round(num3); // 5
+  Math.round(num4); // 6
+    //요구사항 : 소수점 둘째자리 까지 표현(셋째 자리에서 반올림)
+    let userRate = 30.1234;
+    Math.round(userRate*100)/100 // 1번 방법
+    Number(userRate.toFixed(2)); // 2번 방법 (통계, 지표작업에 많이 사용) 단, 문자열을 반환하기 때문에 Number()를 이용해 숫자로 바꿔줌
+
+  // 4. Math.random() : 0~1 사이 무작위 숫자 생성
+    //요구사항 : 1 ~ 100 사이 임의의 숫자를 뽑아라
+    const a = Math.floor(Math.random()*100)+1
+
+  // 5. Math.max() : 최대값 / Math.min() : 최소값
+  Math.max(1, 4, -1, 5, 10, 9, 5.54); // 10
+  Math.min(1, 4, -1, 5, 10, 9, 5.54); // -1
+  
+  // 6. Math.abs() : 절대값
+  Math.abs(-1); // 1
+  
+  // 7. Math.pow(n,m) : n의 m승 값 (제곱)
+  Math.pow(2, 10); // 1024
+
+  // 8. Math.sqrt() : 제곱근
+  Math.sqrt(16); // 4
+
+  // 9. isNaN() : NaN인지 아닌지 판단함
+  let x = Number('x'); //NaN
+  NaN == NaN // false
+  isNaN(x) // true
+  isNaN(3) // false
+
+  // 10. parseint() : 문자열을 숫자로 바꿔줌
+  let margin = '10px';
+  parseInt(margin); // 10
+  Number(margin); // NaN
+  let redColor = 'f3';
+  parseInt(redColor); // NaN
+  parseInt(redColor, 16); // 16진수 : 243
+
+  // 11. parseFloat()
+  let padding = '18.5%';
+  parseFlnt(padding); // 18
+  parseFloat(padding); // 18.5
+*/
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
